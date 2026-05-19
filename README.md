@@ -1,4 +1,4 @@
-# 📊 DataAnalysis Teacher — ChartBot
+# 📊 DataAnalysis Teacher — PavithraBot
 
 **Learn SQL and Excel. Slowly. Gently. One step at a time.**
 
@@ -53,7 +53,7 @@ I do not use big words. I do not rush. I use **stories and pictures** — becaus
 
 ## 🌐 Try It Now
 
-**👉 [Open ChartBot](https://Parafounder01.github.io/DataAnalysis-teacher-/chartbot.html)**
+**👉 [Open PavithraBot](https://Parafounder01.github.io/DataAnalysis-teacher-/pavithrabot.html)**
 
 No sign-up. No account. Just you and a 1,247-year-old teacher.
 
@@ -73,7 +73,7 @@ This project was built for:
 
 | File | What It Is |
 |------|-----------|
-| `chartbot.html` | The ChartBot learning app (open in any browser) |
+| `pavithrabot.html` | The PavithraBot learning app (open in any browser) |
 | `teacher.md` | Master Thalassos — the teacher's soul and method |
 
 ---
