@@ -20,6 +20,24 @@ I do not use big words. I do not rush. I use **stories and pictures** — becaus
 
 ---
 
+## ✨ AI-Powered Chat
+
+PavithraBot uses **OpenRouter** (free Mistral 7B model) to generate real, intelligent responses when you type questions. Just ask anything about SQL or Excel, and Master Thalassos answers with warmth, analogies, and patience.
+
+- No AI configured? No problem — the bot falls back to scripted responses
+- **Scripted Mode** = green dot in header · **AI Mode** = amber dot
+
+### To enable AI (optional)
+
+1. Get a free API key from [openrouter.ai/keys](https://openrouter.ai/keys)
+2. Copy `config.example.js` → `config.js`
+3. Paste your key: `const OPENROUTER_KEY = 'sk-or-v1-...';`
+4. Refresh PavithraBot — you will see **"AI Ready"** in the header
+
+> Your `config.js` is in `.gitignore` and will never be committed.
+
+---
+
 ## 🗂️ What You Will Learn
 
 ### SQL (Structured Query Language)
@@ -48,6 +66,7 @@ I do not use big words. I do not rush. I use **stories and pictures** — becaus
 4. **Try it yourself** — Type your answer in the practice box
 5. **Get feedback** — Gentle hints if you are stuck
 6. **See the chart** — Every lesson ends with a picture of the data
+7. **Chat freely** — Ask any question and the AI teacher responds
 
 ---
 
@@ -75,6 +94,9 @@ This project was built for:
 |------|-----------|
 | `pavithrabot.html` | The PavithraBot learning app (open in any browser) |
 | `teacher.md` | Master Thalassos — the teacher's soul and method |
+| `config.example.js` | Template — copy to `config.js` and add your OpenRouter API key |
+| `config.js` | Your local API key (ignored by git — never committed) |
+| `.gitignore` | Prevents `config.js` from being pushed to GitHub |
 
 ---
 

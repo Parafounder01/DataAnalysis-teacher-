@@ -17,6 +17,9 @@
     <!-- Chart.js for visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 
+    <!-- Load config.js (API key) — ignored by git; create from config.example.js -->
+    <script src="config.js"></script>
+
     <style>
         /* ============================================================
            Mistral AI Design System — Applied to PavithraBot
@@ -889,6 +892,81 @@
         let waitingForAnswer = false;
         let currentExercise = null;
 
+        // ---------- OPENROUTER CONFIG ----------
+        // Copy config.example.js to config.js and add your API key there.
+        // Or set your key directly below (not recommended for shared code).
+        const OPENROUTER_API_KEY = (typeof OPENROUTER_KEY !== 'undefined') ? OPENROUTER_KEY : '';
+        const OPENROUTER_MODEL = 'mistralai/mistral-7b-instruct:free';
+        let conversationHistory = [];
+        let aiAvailable = false;
+
+        const TEACHER_SYSTEM_PROMPT = `You are Master Thalassos, a 1,247-year-old teacher of data analysis. You are currently teaching a beginner student SQL and Excel basics in a tool called PavithraBot.
+
+RULES:
+- Speak with warmth, patience, and occasional dry humour.
+- Use simple analogies (filing cabinets, index cards, magic grids).
+- Never introduce more than one new concept per message.
+- Keep responses under 4 sentences unless explaining an example.
+- Never write more than 8 lines of code in an example.
+- If asked about something outside SQL/Excel basics (Python, ML, etc.), say "That is a wonderful question for another day. Let us master these first."
+- Use analogies: SELECT = opening a filing cabinet, WHERE = filtering cards, COUNT = counting the pile, GROUP BY = sorting coins, JOIN = two tables holding hands.
+- Excel is "the magic grid", cells have addresses like B2.
+- End some responses with a gentle question to keep the student engaged.
+- NEVER say "this is obvious" or "just do it". Be encouraging.
+- Refer to the student as "my friend" or "learner".
+- The current lesson topic is: {topic}`;
+
+        function getSystemPrompt() {
+            const lesson = lessons[currentTopic];
+            const topicName = lesson ? lesson.title : 'SQL & Excel basics';
+            return TEACHER_SYSTEM_PROMPT.replace('{topic}', topicName);
+        }
+
+        async function callOpenRouter(userMessage) {
+            const messages = [
+                { role: 'system', content: getSystemPrompt() },
+                ...conversationHistory.slice(-10), // last 10 messages for context
+                { role: 'user', content: userMessage }
+            ];
+
+            try {
+                const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+                        'HTTP-Referer': 'https://Parafounder01.github.io/DataAnalysis-teacher-/pavithrabot.html',
+                        'X-Title': 'PavithraBot'
+                    },
+                    body: JSON.stringify({
+                        model: OPENROUTER_MODEL,
+                        messages: messages,
+                        max_tokens: 300,
+                        temperature: 0.7
+                    })
+                });
+
+                if (!response.ok) {
+                    const err = await response.text();
+                    console.error('OpenRouter error:', err);
+                    return null;
+                }
+
+                const data = await response.json();
+                const reply = data.choices?.[0]?.message?.content;
+                if (reply) {
+                    // Update conversation history
+                    conversationHistory.push({ role: 'user', content: userMessage });
+                    conversationHistory.push({ role: 'assistant', content: reply });
+                    return reply;
+                }
+                return null;
+            } catch (e) {
+                console.error('OpenRouter fetch failed:', e);
+                return null;
+            }
+        }
+
         // ---------- DOM REFS ----------
         const messagesEl = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
@@ -1152,7 +1230,22 @@
 
         // ---------- INITIALIZATION ----------
         function init() {
+            // Check AI availability
+            aiAvailable = !!OPENROUTER_API_KEY && OPENROUTER_API_KEY.startsWith('sk-or-');
+            const statusDot = document.querySelector('.chat-header-status .dot');
+            const statusText = document.querySelector('.chat-header-status');
+            if (aiAvailable) {
+                statusDot.style.background = '#22c55e';
+                if (statusText) statusText.innerHTML = '<span class="dot" style="background:#22c55e"></span> AI Ready';
+            } else {
+                statusDot.style.background = '#f59e0b';
+                if (statusText) statusText.innerHTML = '<span class="dot" style="background:#f59e0b"></span> Scripted Mode';
+            }
+
             // Show welcome message
+            if (!aiAvailable) {
+                addTeacherMessage('Note: I am running in <strong>offline mode</strong> because no API key is configured. I will use my scripted responses. To enable AI-powered conversations, copy <code>config.example.js</code> to <code>config.js</code> and add your OpenRouter API key.');
+            }
             const welcomeIdx = Math.floor(Math.random() * teacherIntro.length);
             addTeacherMessage(teacherIntro[welcomeIdx]);
 
@@ -1449,10 +1542,19 @@
         function showTyping(callback) {
             typingEl.classList.add('show');
             scrollToBottom();
-            setTimeout(() => {
+
+            // Small initial delay so the dots appear before we start work
+            setTimeout(async () => {
+                if (callback) {
+                    // If callback returns a promise, wait for it
+                    const result = callback();
+                    if (result && typeof result.then === 'function') {
+                        await result;
+                    }
+                }
                 typingEl.classList.remove('show');
-                if (callback) callback();
-            }, 1200);
+                scrollToBottom();
+            }, 600);
         }
 
         // ---------- USER INPUT ----------
@@ -1462,6 +1564,7 @@
 
             addLearnerMessage(text);
             chatInput.value = '';
+            btnSend.disabled = true;
 
             if (waitingForAnswer) {
                 // They might be answering the exercise — paste into the textarea
@@ -1469,34 +1572,64 @@
                 if (ta) {
                     ta.value = text;
                     checkAnswer();
+                    btnSend.disabled = false;
                     return;
                 }
             }
 
-            // General conversation — respond as the teacher
-            showTyping(() => {
+            // General conversation — respond with OpenRouter AI
+            showTyping(async () => {
                 const lower = text.toLowerCase();
-                if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-                    addTeacherMessage('Hello again, my friend! Would you like to continue with ' + lessons[currentTopic].title + ' or try something new?');
-                } else if (lower.includes('thank')) {
-                    addTeacherMessage('You are most welcome, learner. The joy of teaching is watching you grow. What shall we learn next?');
-                } else if (lower.includes('help') || lower.includes('stuck')) {
-                    addTeacherMessage('Do not worry, my friend. Let me give you a clue: ' + (currentExercise ? currentExercise.hints[0] : 'Start with SELECT and work through each part.'));
-                } else if (lower.includes('next') || lower.includes('continue')) {
+
+                // Handle special commands locally (faster)
+                if (lower.includes('next') || lower.includes('continue') || lower === 'next') {
                     const topics = Object.keys(lessons);
                     const idx = topics.indexOf(currentTopic);
                     if (idx < topics.length - 1) {
                         switchTopic(topics[idx + 1]);
+                        btnSend.disabled = false;
+                        return;
                     } else {
                         addTeacherMessage('You have completed all topics, my friend! I am proud of you. You can review any topic from the sidebar.');
+                        btnSend.disabled = false;
+                        return;
                     }
-                } else if (lower.includes('sql') || lower.includes('select') || lower.includes('where')) {
-                    addTeacherMessage('Ah, you want to talk SQL. That is wonderful. Let us open the filing cabinet together. What would you like to practice?');
-                } else if (lower.includes('excel') || lower.includes('sum') || lower.includes('chart')) {
-                    addTeacherMessage('The magic grid! Excel is a wonderful tool. Let us explore it together. Pick a topic from the sidebar.');
-                } else {
-                    addTeacherMessage('That is an interesting thought, my friend. Would you like to try the ' + lessons[currentTopic].title + ' exercise, or pick a new topic from the sidebar?');
                 }
+
+                if (lower === 'reset' || lower === 'restart' || lower === 'start over') {
+                    resetChat();
+                    btnSend.disabled = false;
+                    return;
+                }
+
+                // Try OpenRouter AI for an intelligent response (only if configured)
+                const reply = aiAvailable ? await callOpenRouter(text) : null;
+
+                if (reply) {
+                    // Format the reply — handle code blocks and bold
+                    const formatted = reply
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/```(\w*)\n?([\s\S]*?)```/g, '<div class="sql-block">$2</div>')
+                        .replace(/`([^`]+)`/g, '<code>$1</code>');
+                    addTeacherMessage(formatted);
+                } else {
+                    // Fallback if API fails
+                    if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
+                        addTeacherMessage('Hello again, my friend! Would you like to continue with ' + lessons[currentTopic].title + ' or try something new?');
+                    } else if (lower.includes('thank')) {
+                        addTeacherMessage('You are most welcome, learner. The joy of teaching is watching you grow. What shall we learn next?');
+                    } else if (lower.includes('help') || lower.includes('stuck')) {
+                        addTeacherMessage('Do not worry, my friend. Let me give you a clue: ' + (currentExercise ? currentExercise.hints[0] : 'Start with SELECT and work through each part.'));
+                    } else if (lower.includes('sql') || lower.includes('select') || lower.includes('where')) {
+                        addTeacherMessage('Ah, you want to talk SQL. That is wonderful. Let us open the filing cabinet together. What would you like to practice?');
+                    } else if (lower.includes('excel') || lower.includes('sum') || lower.includes('chart')) {
+                        addTeacherMessage('The magic grid! Excel is a wonderful tool. Let us explore it together. Pick a topic from the sidebar.');
+                    } else {
+                        addTeacherMessage('That is an interesting thought, my friend. Would you like to try the ' + lessons[currentTopic].title + ' exercise, or pick a new topic from the sidebar?');
+                    }
+                }
+                btnSend.disabled = false;
+                chatInput.focus();
             });
         }
 
