@@ -1,4 +1,4 @@
-# 📊 DataAnalysis Teacher — PavithraBot
+# 🌀 DataAnalysis Teacher — PavithraBot
 
 **Learn SQL and Excel. Slowly. Gently. One step at a time.**
 
