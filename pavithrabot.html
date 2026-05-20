@@ -744,6 +744,316 @@
                 font-size: 12px;
                 padding: var(--space-1) var(--space-3);
             }
+            #listeningIndicator .wave {
+                display: none;
+            }
+            #listeningIndicator {
+                font-size: 11px;
+            }
+        }
+
+        /* ============================================================
+           DARK MODE — HP Ink Slab Aesthetic
+           ============================================================ */
+
+        /* Smooth transitions for theme switching */
+        body, .nav-bar, .sidebar, .chat-area, .chat-header, .chat-input-bar,
+        .message, .footer, .utility-strip, .topic-btn, .history-item,
+        .chat-input-inner input, .btn-send, .typing-indicator,
+        .sidebar-section-header, .chat-header-info p, .chat-header-status,
+        .message code, .code-block, .data-table-wrap th, .data-table-wrap td,
+        .modal-overlay, .modal-content, #listeningIndicator, .voice-btn,
+        .nav-icon-btn, .nav-upgrade-link, .sidebar-section-header::before {
+            transition: background-color 0.3s ease, color 0.3s ease,
+                        border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --canvas: #1a1a1a;
+            --cloud: #222222;
+            --fog: #2a2a2a;
+            --primary-light: #0a1a3a;
+            --ink: #ffffff;
+            --charcoal: #cccccc;
+            --on-ink: #ffffff;
+            --hairline: #333333;
+            --steel: #777777;
+            --shadow-lift: 0 2px 8px rgba(0,0,0,0.4);
+            --shadow-heavy: 0 4px 16px rgba(0,0,0,0.5);
+        }
+
+        [data-theme="dark"] .utility-strip {
+            background: linear-gradient(90deg, #024ad8, #1a5eff, #024ad8);
+        }
+
+        [data-theme="dark"] .footer {
+            background: #0d0d0d;
+        }
+
+        [data-theme="dark"] .sidebar {
+            background: #2a2a2a;
+        }
+
+        [data-theme="dark"] .message.teacher {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+        }
+
+        [data-theme="dark"] .message.teacher .msg-label {
+            color: #4a8aff;
+        }
+
+        [data-theme="dark"] .chat-input-inner input {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .topic-btn {
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .topic-btn:hover {
+            background: #333333;
+        }
+
+        [data-theme="dark"] .history-item {
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .sidebar-section-header {
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .message code {
+            background: rgba(255,255,255,0.08);
+        }
+
+        [data-theme="dark"] .message .data-table-wrap th {
+            border-bottom-color: #444444;
+        }
+
+        [data-theme="dark"] .message .data-table-wrap td {
+            border-bottom-color: #333333;
+        }
+
+        /* ---------- NAV ICON BUTTONS ---------- */
+        .nav-icon-btn {
+            background: none;
+            border: none;
+            color: var(--charcoal);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: var(--rounded-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .nav-icon-btn:hover {
+            color: var(--ink);
+            background: var(--cloud);
+        }
+
+        .nav-upgrade-link {
+            color: var(--primary) !important;
+            font-weight: 600 !important;
+        }
+
+        /* ---------- VOICE INPUT ---------- */
+        .voice-btn {
+            background: none;
+            border: 1px solid var(--steel);
+            border-radius: var(--rounded-sm);
+            height: 44px;
+            width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--charcoal);
+            font-size: 18px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .voice-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .voice-btn.recording {
+            border-color: #e53e3e;
+            color: #e53e3e;
+            background: rgba(229,62,62,0.06);
+            animation: pulse-mic 1.2s ease infinite;
+        }
+
+        @keyframes pulse-mic {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(229,62,62,0.3); }
+            50% { box-shadow: 0 0 0 6px rgba(229,62,62,0); }
+        }
+
+        .voice-btn.not-supported {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* ---------- LISTENING INDICATOR ---------- */
+        #listeningIndicator {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #e53e3e;
+            font-weight: 500;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        #listeningIndicator.show {
+            display: flex;
+        }
+
+        #listeningIndicator .wave {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        #listeningIndicator .wave span {
+            width: 3px;
+            height: 12px;
+            background: #e53e3e;
+            border-radius: 2px;
+            animation: wave 0.6s ease infinite;
+        }
+
+        #listeningIndicator .wave span:nth-child(2) { animation-delay: 0.1s; height: 16px; }
+        #listeningIndicator .wave span:nth-child(3) { animation-delay: 0.2s; height: 10px; }
+        #listeningIndicator .wave span:nth-child(4) { animation-delay: 0.3s; height: 14px; }
+        #listeningIndicator .wave span:nth-child(5) { animation-delay: 0.4s; height: 8px; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+
+        /* ---------- UPGRADE MODAL ---------- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            animation: modalFadeIn 0.2s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--canvas);
+            border-radius: var(--rounded-lg);
+            padding: var(--space-8);
+            max-width: 440px;
+            width: 90%;
+            box-shadow: var(--shadow-heavy);
+            position: relative;
+            animation: modalSlideIn 0.25s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--charcoal);
+            padding: 4px;
+            line-height: 1;
+            border-radius: var(--rounded-sm);
+        }
+
+        .modal-close:hover {
+            color: var(--ink);
+            background: var(--cloud);
+        }
+
+        .modal-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            border-radius: var(--rounded-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--on-ink);
+            font-size: 28px;
+            margin-bottom: var(--space-4);
+        }
+
+        .modal-content h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+
+        .modal-content .modal-sub {
+            font-size: 14px;
+            color: var(--charcoal);
+            margin-bottom: var(--space-6);
+        }
+
+        .modal-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .modal-features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            font-size: 14px;
+            padding: var(--space-2) var(--space-3);
+            background: var(--cloud);
+            border-radius: var(--rounded-sm);
+        }
+
+        .modal-features li i {
+            color: var(--primary);
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .modal-footer-text {
+            font-size: 12px;
+            color: var(--steel);
+            text-align: center;
         }
     </style>
 </head>
@@ -760,6 +1070,9 @@
                 <span class="brand-name">Pavithra<span>Bot</span></span>
             </a>
             <ul class="nav-bar-links">
+                <li><button id="darkModeToggle" class="nav-icon-btn" aria-label="Toggle dark mode"><i class="bi bi-moon"></i></button></li>
+                <li><button id="exportChatBtn" class="nav-icon-btn" aria-label="Export chat"><i class="bi bi-download"></i></button></li>
+                <li><a href="#" id="upgradeLink" class="nav-upgrade-link">Pro</a></li>
                 <li><a href="index.html">Portfolio</a></li>
                 <li><a href="#" onclick="resetChat(); return false;">New Conversation</a></li>
             </ul>
@@ -835,6 +1148,8 @@
             <div class="chat-input-bar">
                 <div class="chat-input-inner">
                     <input type="text" id="chatInput" placeholder="Ask Master Thalassos anything about SQL or Excel..." autofocus />
+                    <div id="listeningIndicator"><span class="wave"><span></span><span></span><span></span><span></span><span></span></span> Listening...</div>
+                    <button id="voiceBtn" class="voice-btn" aria-label="Voice input" title="Voice input"><i class="bi bi-mic"></i></button>
                     <button class="btn-send" id="btnSend" onclick="handleUserInput()">
                         <i class="bi bi-send-fill"></i> Send
                     </button>
@@ -842,6 +1157,23 @@
             </div>
         </main>
 
+    </div>
+
+    <!-- ==================== UPGRADE MODAL ==================== -->
+    <div class="modal-overlay" id="upgradeModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-icon"><i class="bi bi-stars"></i></div>
+            <h2>PavithraBot Pro</h2>
+            <p class="modal-sub">Coming Soon — Be the first to know.</p>
+            <ul class="modal-features">
+                <li><i class="bi bi-cpu"></i> GPT-4 Model — Smarter, more detailed responses</li>
+                <li><i class="bi bi-infinity"></i> Unlimited Chat History — Never lose a conversation</li>
+                <li><i class="bi bi-filetype-pdf"></i> PDF Export — Save lessons as PDF</li>
+                <li><i class="bi bi-headset"></i> Priority Support — Direct help from the team</li>
+            </ul>
+            <p class="modal-footer-text">Free tier remains available with all current features.</p>
+        </div>
     </div>
 
     <!-- ==================== FOOTER (ink) ==================== -->
@@ -1372,6 +1704,155 @@ RULES:
 
         // ---------- START ----------
         init();
+
+        // ---------- DARK MODE TOGGLE ----------
+        function initDarkMode() {
+            const saved = localStorage.getItem('pavithrabot-theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                const icon = document.querySelector('#darkModeToggle i');
+                if (icon) icon.className = 'bi bi-sun';
+            }
+        }
+
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            const icon = document.querySelector('#darkModeToggle i');
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('pavithrabot-theme', 'light');
+                if (icon) icon.className = 'bi bi-moon';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('pavithrabot-theme', 'dark');
+                if (icon) icon.className = 'bi bi-sun';
+            }
+        });
+
+        initDarkMode();
+
+        // ---------- VOICE INPUT (Web Speech API) ----------
+        let recognition = null;
+        let isRecording = false;
+
+        function initVoice() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const voiceBtn = document.getElementById('voiceBtn');
+            if (!SpeechRecognition) {
+                if (voiceBtn) {
+                    voiceBtn.classList.add('not-supported');
+                    voiceBtn.title = 'Voice input not supported in this browser';
+                }
+                return;
+            }
+            recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = true;
+            recognition.continuous = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = function(event) {
+                let transcript = '';
+                for (var i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                chatInput.value = transcript;
+                chatInput.focus();
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech error:', event.error);
+                stopRecording();
+            };
+
+            recognition.onend = function() {
+                stopRecording();
+            };
+
+            voiceBtn.addEventListener('click', function() {
+                if (isRecording) {
+                    stopRecording();
+                } else {
+                    startRecording();
+                }
+            });
+        }
+
+        function startRecording() {
+            if (!recognition) return;
+            try {
+                recognition.start();
+                isRecording = true;
+                var btn = document.getElementById('voiceBtn');
+                var ind = document.getElementById('listeningIndicator');
+                btn.classList.add('recording');
+                btn.querySelector('i').className = 'bi bi-mic-fill';
+                ind.classList.add('show');
+            } catch (e) {
+                console.error('Speech start error:', e);
+            }
+        }
+
+        function stopRecording() {
+            if (!recognition) return;
+            try { recognition.stop(); } catch (e) {}
+            isRecording = false;
+            var btn = document.getElementById('voiceBtn');
+            var ind = document.getElementById('listeningIndicator');
+            btn.classList.remove('recording');
+            btn.querySelector('i').className = 'bi bi-mic';
+            ind.classList.remove('show');
+        }
+
+        initVoice();
+
+        // ---------- EXPORT CHAT ----------
+        document.getElementById('exportChatBtn').addEventListener('click', function() {
+            var messages = document.querySelectorAll('#chatMessages .message');
+            if (messages.length === 0) return;
+
+            var text = 'PavithraBot Conversation \u2014 ' + new Date().toLocaleDateString() + '\n';
+            text += '================================\n\n';
+
+            messages.forEach(function(msg) {
+                var isLearner = msg.classList.contains('learner');
+                var content = msg.textContent.trim();
+                if (isLearner) {
+                    text += 'You: ' + content + '\n\n';
+                } else {
+                    var clean = content.replace(/^Master Thalassos\s*/, '');
+                    text += 'Master Thalassos: ' + clean + '\n\n';
+                }
+            });
+
+            var blob = new Blob([text], { type: 'text/plain' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'pavithrabot-' + new Date().toISOString().split('T')[0] + '.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        // ---------- UPGRADE MODAL ----------
+        document.getElementById('upgradeLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('upgradeModal').classList.add('show');
+        });
+
+        document.getElementById('modalClose').addEventListener('click', function() {
+            document.getElementById('upgradeModal').classList.remove('show');
+        });
+
+        document.getElementById('upgradeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('show');
+            }
+        });
     </script>
 </body>
 </html>
