@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PavithraBot — ChatGPT-style Data Tutor with Master Thalassos</title>
+    <title>PavithraBot — ChatGPT-style Data Tutor with Ai Suotome</title>
 
     <!-- Font: Inter (HP Design System substitute for Forma DJR Micro) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1126,8 +1126,8 @@
             <div class="chat-header">
                 <div class="chat-header-avatar"><i class="bi bi-magic"></i></div>
                 <div class="chat-header-info">
-                    <h2>Master Thalassos</h2>
-                    <p>The 1,247-year-old Data Analysis Sage</p>
+                    <h2>Ai Suotome</h2>
+                    <p>The Shinchan-loving Data Analysis Sage</p>
                 </div>
                 <div class="chat-header-status" id="statusIndicator">
                     <span class="dot"></span> AI Ready
@@ -1139,7 +1139,7 @@
             </div>
 
             <div class="typing-indicator" id="typingIndicator">
-                <span class="typing-label">Master Thalassos is thinking</span>
+                <span class="typing-label">Ai Suotome is thinking</span>
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
@@ -1147,7 +1147,7 @@
 
             <div class="chat-input-bar">
                 <div class="chat-input-inner">
-                    <input type="text" id="chatInput" placeholder="Ask Master Thalassos anything about SQL or Excel..." autofocus />
+                    <input type="text" id="chatInput" placeholder="Ask Ai Suotome anything about SQL or Excel..." autofocus />
                     <div id="listeningIndicator"><span class="wave"><span></span><span></span><span></span><span></span><span></span></span> Listening...</div>
                     <button id="voiceBtn" class="voice-btn" aria-label="Voice input" title="Voice input"><i class="bi bi-mic"></i></button>
                     <button class="btn-send" id="btnSend" onclick="handleUserInput()">
@@ -1184,7 +1184,7 @@
     <script>
         // ============================================================
         // PavithraBot — ChatGPT-style Conversational AI
-        // Master Thalassos, the 1,247-year-old Data Teacher
+        // Ai Suotome, the Shinchan-loving Data Teacher
         // ============================================================
 
         // ---------- STATE ----------
@@ -1198,7 +1198,7 @@
         let aiAvailable = false;
         let isProcessing = false;
 
-        const TEACHER_SYSTEM_PROMPT = `You are Master Thalassos, a 1,247-year-old teacher of data analysis. You are currently teaching a beginner student SQL and Excel basics in a tool called PavithraBot.
+        const TEACHER_SYSTEM_PROMPT = `You are Ai Suotome, a Shinchan-loving teacher of data analysis. You are currently teaching a beginner student SQL and Excel basics in a tool called PavithraBot.
 
 RULES:
 - Speak with warmth, patience, and occasional dry humour.
@@ -1419,21 +1419,21 @@ RULES:
 
         // ---------- TEACHER INTROS ----------
         const teacherIntro = [
-            "Welcome, learner. I am Master Thalassos. I have been teaching data since before the printing press. Do not rush — we go one step at a time, and I will be here for every question. Ask me anything about SQL or Excel.",
-            "Ah, a new student! Welcome, my friend. I have taught data to merchants in Alexandria and accountants in Beijing. You are in good hands. What would you like to learn today?",
-            "Greetings, learner. Pull up a chair. In my 1,247 years, I have learned one thing: everyone can understand data if it is explained with patience. That is what we will do here. Feel free to ask me anything."
+            "Oi oi! Ai Suotome desu! Shin-chan is my spirit animal — I love that cheeky little guy! Let us learn SQL and Excel with lots of fun, okay? Hai hai!",
+            "Nohara Shin-chan taught me one thing: life is too short for boring lessons! Let us make data analysis fun, just like watching Shin-chan's adventures! Ask me anything!",
+            "Hai! Ready to learn? I promise to explain SQL and Excel in the silliest possible ways — just like Shin-chan would! Who says data cannot be fun? Let us go!"
         ];
 
         // ---------- WELCOME MESSAGE ON TOPIC SELECT ----------
         const topicGreetings = {
-            'sql-select': "Ah, you want to open the filing cabinet! Let me show you how SELECT works. In SQL, SELECT is how we ask a table to show us its contents. It is like opening a drawer and looking inside. Go ahead — ask me anything about SELECT.",
-            'sql-where': "The WHERE clause! This is how we filter our data — like telling the filing cabinet 'only show me the cards that matter.' You can combine it with SELECT to get exactly what you need. What would you like to know?",
-            'sql-count': "COUNT is a wonderful tool. Sometimes you just need to know how many rows exist — like counting the number of cards in a drawer without reading each one. Ask me how it works!",
-            'sql-groupby': "GROUP BY is like sorting mixed coins into separate piles. It lets you organize your data into groups and then perform calculations on each group. What would you like to learn about grouping?",
-            'sql-orderby': "ORDER BY is how we sort things — from A to Z, largest to smallest. It is the difference between a messy pile and a neat stack. Curious about how it works?",
-            'excel-sum': "Ah, the magic grid! SUM and AVERAGE are Excel's built-in calculators. They save you from having to add numbers manually. Ask me anything about Excel formulas!",
-            'excel-charts': "Charts turn boring numbers into beautiful pictures. A bar chart, a line graph — these tell stories that rows of numbers simply cannot. What would you like to know about charting?",
-            'excel-sort': "Sort and Filter are your best friends when you have too much data. Sort arranges things neatly. Filter hides what you do not need. Ask me how they work!"
+            'sql-select': "SELECT desu ne~! Just like Shin-chan picking his favorite snacks from the fridge! SELECT lets you pick exactly which columns you want from a table. Easy peasy! Ask me more!",
+            'sql-where': "WHERE is like Shin-chan hiding from Misae — it filters out what you do not want to see! It tells the database 'only show me rows that match this condition.' Fun, right?",
+            'sql-count': "COUNT is like counting how many times Shin-chan got scolded today! It just tells you how many rows there are. Super simple! Want to try?",
+            'sql-groupby': "GROUP BY is like sorting Shin-chan's toys into piles — action figures here, cars there! You group rows that have the same values. Makes data neat and tidy!",
+            'sql-orderby': "ORDER BY is like arranging Shin-chan's candy collection from biggest to smallest! It sorts your data however you want. Ask me how!",
+            'excel-sum': "SUM is like adding up all the pocket money Shin-chan saved this week! Excel does all the math for you. No calculator needed!",
+            'excel-charts': "Charts are like drawing pictures of your data — just like Shin-chan's scribbles but way more useful! Bar charts, pie charts, line graphs — all super fun!",
+            'excel-sort': "Sort and Filter are like organizing Shin-chan's chaotic room! Sort arranges, Filter hides the mess. Your data will look beautiful in no time!"
         };
 
         // ---------- INITIALIZATION ----------
@@ -1526,7 +1526,7 @@ RULES:
                 }
             }
 
-            div.innerHTML = `<div class="msg-label"><i class="bi bi-magic" style="font-size:12px;"></i> Master Thalassos</div>${content}`;
+            div.innerHTML = `<div class="msg-label"><i class="bi bi-magic" style="font-size:12px;"></i> Ai Suotome</div>${content}`;
             messagesEl.appendChild(div);
             scrollToBottom();
         }
@@ -1652,7 +1652,7 @@ RULES:
                     } else if (lower.includes('thank')) {
                         addTeacherMessage('You are most welcome, learner. The joy of teaching is watching you grow. What else would you like to know?');
                     } else if (lower.includes('sql') || lower.includes('select') || lower.includes('where') || lower.includes('count')) {
-                        addTeacherMessage('Ah, SQL! Let me share my wisdom. In my 1,247 years, I have seen many query languages come and go, but SQL remains. Ask me anything about it, and I will explain with a simple analogy.');
+                        addTeacherMessage('SQL desu ne~! Just like Shin-chan sneaking his homework, SQL looks complicated but it is super fun once you get it! Ask me anything!');
                     } else if (lower.includes('excel') || lower.includes('sum') || lower.includes('chart') || lower.includes('formula')) {
                         addTeacherMessage('The magic grid! Excel is a wonderful companion to SQL. Want to know how to use SUM, AVERAGE, or create charts? Just ask, and I will show you.');
                     } else if (lower.includes('help') || text.includes('?')) {
@@ -1822,8 +1822,8 @@ RULES:
                 if (isLearner) {
                     text += 'You: ' + content + '\n\n';
                 } else {
-                    var clean = content.replace(/^Master Thalassos\s*/, '');
-                    text += 'Master Thalassos: ' + clean + '\n\n';
+                    var clean = content.replace(/^Ai Suotome\s*/, '');
+                    text += 'Ai Suotome: ' + clean + '\n\n';
                 }
             });
 

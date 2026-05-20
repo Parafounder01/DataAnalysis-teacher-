@@ -1,36 +1,36 @@
 # DataAnalysis Teacher — PavithraBot
 
-**Learn SQL and Excel through conversation. ChatGPT-style chat with Master Thalassos, powered by OpenRouter AI.**
+**Learn SQL and Excel through conversation. ChatGPT-style chat with Ai Suotome, a Shinchan-loving teacher powered by OpenRouter AI.**
 
-Hello there. 👋
+Hello there! 👋
 
 Do numbers feel overwhelming? Does SQL sound like a foreign language? Do you open Excel and feel lost?
 
-This is for you. Now redesigned as a **ChatGPT-style conversational AI** with the **HP Design System**.
+Meet **Ai Suotome** — she loves Shin-chan, speaks in "desu ne~", and thinks data should be as fun as watching Crayon Shin-chan!
 
 ---
 
-## Meet Your Teacher: Master Thalassos
+## Meet Your Teacher: Ai Suotome
 
-I have been teaching data for **1,247 years**. I taught merchants in Alexandria, accountants in Beijing, and clerks in Victorian London. Now I am here for you.
+Oi oi! I am Ai Suotome! I love Shin-chan more than anything, and I believe data should be taught with lots of fun, silly analogies, and zero boring lectures.
 
-I do not use big words. I do not rush. I use **stories and pictures** — because that is how humans learn.
+I do not use big words. I do not rush. I use **Shin-chan-style stories and pictures** — because that is how everyone learns best!
 
-> *"A database table is like a filing cabinet. SELECT opens the drawer. WHERE finds the right card."*
+> *"SELECT is like Shin-chan picking snacks from the fridge. WHERE is like Shin-chan hiding from Misae! Easy, right? Hai hai!"*
 
 ---
 
 ## AI-Powered Conversational Chat
 
-PavithraBot is now a **ChatGPT-style chat interface**. Every message you send is answered by **OpenRouter AI** (Mistral 7B Instruct) — no more scripted exercises or practice cards. Just you, your questions, and a 1,247-year-old teacher who responds with warmth, analogies, and patience.
+PavithraBot is a **ChatGPT-style chat interface**. Every message you send is answered by **OpenRouter AI** (Mistral 7B Instruct) — no scripted exercises, no boring lectures. Just you, your questions, and a teacher who makes SQL and Excel feel like playtime.
 
 ### How it works
 
 1. **Type any question** about SQL or Excel in the chat input
-2. **Master Thalassos responds** with an AI-generated answer, complete with analogies and code examples
+2. **Ai Suotome responds** with a Shin-chan-style analogy, fun comparison, and clear code examples
 3. **Click a topic** in the sidebar to switch context — the teacher tailors responses to that topic
 4. **Conversation history** is maintained for context (last 10 messages)
-5. **Fallback responses** kick in if OpenRouter is unavailable — the teacher still responds from built-in knowledge
+5. **Fallback responses** kick in if OpenRouter is unavailable — Ai still responds from built-in knowledge
 
 ### To enable AI
 
@@ -90,8 +90,8 @@ The interface follows the **HP Design System** with these tokens:
 ### Key UI features
 
 - **User messages**: HP Electric Blue bubbles, right-aligned
-- **Teacher messages**: White cards on cloud background, left-aligned, with Master Thalassos label
-- **Typing indicator**: Bouncing dots with "Master Thalassos is thinking" label
+- **Teacher messages**: White cards on cloud background, left-aligned, with Ai Suotome label
+- **Typing indicator**: Bouncing dots with "Ai Suotome is thinking..." label
 - **Sticky input bar**: Always visible at the bottom
 - **Code blocks**: Dark (ink) background with monospace font
 - **Sidebar**: Topics section + conversation history with HP Electric Blue chevron decoration
@@ -102,20 +102,20 @@ The interface follows the **HP Design System** with these tokens:
 ## What You Will Learn
 
 ### SQL (Structured Query Language)
-| Concept | The Simple Idea |
-|---------|----------------|
-| **SELECT** | "Show me everything in this drawer" |
-| **WHERE** | "Only show me the vanilla ones" |
-| **COUNT** | "How many cards are in this pile?" |
-| **GROUP BY** | "Sort these coins into piles" |
-| **ORDER BY** | "Line them up by height" |
+| Concept | The Silly Analogy |
+|---------|-------------------|
+| **SELECT** | "Shin-chan picking snacks from the fridge" |
+| **WHERE** | "Shin-chan hiding from Misae" |
+| **COUNT** | "Counting how many times Shin-chan got scolded" |
+| **GROUP BY** | "Sorting toys into piles" |
+| **ORDER BY** | "Arranging candy from biggest to smallest" |
 
 ### Excel (The Magic Grid)
-| Concept | The Simple Idea |
-|---------|----------------|
-| **SUM & AVERAGE** | "The built-in calculator" |
-| **Charts** | "Turn numbers into a picture" |
-| **Sort & Filter** | "Find what you need, hide the rest" |
+| Concept | The Silly Analogy |
+|---------|-------------------|
+| **SUM & AVERAGE** | "Adding up Shin-chan's pocket money" |
+| **Charts** | "Drawing Shin-chan's face with data" |
+| **Sort & Filter** | "Organizing Shin-chan's messy room" |
 
 ---
 
@@ -124,29 +124,24 @@ The interface follows the **HP Design System** with these tokens:
 | File | What It Is |
 |------|-----------|
 | `pavithrabot.html` | The PavithraBot app — ChatGPT-style chat (open in any browser) |
-| `teacher.md` | Master Thalassos — the teacher's soul and method |
+| `teacher.md` | Ai Suotome — the Shinchan-loving teacher's soul and method |
 | `config.example.js` | Template — copy to `config.js` and add your OpenRouter API key |
 | `config.js` | Your local API key (ignored by git — never committed) |
 | `.gitignore` | Prevents `config.js` from being pushed to GitHub |
 
 ---
 
-## What Changed (v2)
+## What Changed (v3 — Ai Suotome Edition)
 
-The original PavithraBot had a Mistral AI design with scripted lessons, practice cards, exercise checking, and a chart sidebar. The new version:
-
-- **ChatGPT-style** conversational interface — every message goes through AI
-- **HP Design System** — Electric Blue, Inter font, 4px buttons, 16px cards
-- **No more practice cards** — ask questions naturally instead
-- **No more check/hint buttons** — the AI teacher guides you
-- **No more chart sidebar** — clean two-column layout (sidebar + chat)
-- **Typing indicator** with teacher label
-- **Sticky input bar** always visible
-- **Conversation history** in sidebar
-- **Code blocks** with dark (ink) background
+- **Rebranded**: Master Thalassos → **Ai Suotome** 🎉
+- **New personality**: Shinchan-loving, anime-style, fun energy teacher
+- **Dark mode toggle**: HP Ink slab aesthetic
+- **Voice input**: Web Speech API microphone button
+- **Landing page**: `index.html` with full HP design
+- **Export chat**: Download conversations as `.txt`
 
 ---
 
 ## License
 
-Free for everyone. Share it. Teach someone. Data belongs to all of us.
+Free for everyone. Share it. Teach someone. Data belongs to all of us. Mata ne~! 🎀
